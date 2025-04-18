@@ -1,0 +1,23 @@
+import socket
+import sys
+
+try:
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    print("Socket has been created successfully")
+except socket.error as e:
+    print(f"Error! Socket cannot be created {e} !")
+
+port_choice = int(input("Enter in desired port number: "))
+
+
+try:
+    domain_choice = input("Enter Domain Address: ")
+    destination = socket.gethostbyname(domain_choice)
+except socket.gaierror:
+
+    print(f"Error received! Could not resolve host!")
+    sys.exit()
+
+s.connect((destination, port_choice))
+
+print (f"Socket has been successfully connected to {domain_choice}!")
